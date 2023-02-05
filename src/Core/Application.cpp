@@ -22,32 +22,50 @@ namespace NAQH{
         SDL_Event event;
         bool running = true;
         SDL_FRect rect = {100, 100, 200, 200};
+        SDL_Texture* img = IMG_LoadTexture(renderer, "res/ScreenShot/screenshot.bmp");
+        int x = 0, y = 0;
+        NAQH::Events::Input input = NAQH::Events::Input(); 
 
         while(running)
         {
+            input.Update();
             while(SDL_PollEvent(&event))
             {
-                if(event.type == SDL_QUIT)
-                    running = false;
-
-                if(event.type == SDL_KEYDOWN)
+                switch(event.type)
                 {
-                    if(event.key.keysym.scancode == SDL_SCANCODE_LEFT)
-                        rect.x -= 2;
-                    if(event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
-                        rect.x += 2;
-                    if(event.key.keysym.scancode == SDL_SCANCODE_UP)
-                        rect.y -= 2;
-                    if(event.key.keysym.scancode == SDL_SCANCODE_DOWN)
-                        rect.y += 2;
+                    case SDL_QUIT:
+                        running = false;
+                        break;
+                    default:
+                        break;
                 }
             }
 
+            // if(input.KeyDown(input.Key_W))
+            //     y -= 5;
+            // if(input.KeyDown(input.Key_S))
+            //     y += 5;
+            // if(input.KeyDown(input.Key_D))
+            //     x += 5;
+            // if(input.KeyDown(input.Key_A))
+            //     x -= 5;
+
+            x = input.MousePosition().x;
+            y = input.MousePosition().y;
+
+            rect.x = x;
+            rect.y = y;
+
+            rect.x = x - rect.w/2;
+            rect.y = y - rect.h/2;
+
+            SDL_ShowCursor(false);
+
             SDL_SetRenderDrawColor(renderer, 17.85, 33.15, 43.35, 255);
             SDL_RenderClear(renderer);
-            SDL_Texture* img = IMG_LoadTexture(renderer, "res/ScreenShot/screenshot.bmp");
             SDL_RenderCopyF(renderer, img, NULL, &rect);
             SDL_RenderPresent(renderer);
+            input.UpdatePrev();
         }
 
         SDL_Quit();

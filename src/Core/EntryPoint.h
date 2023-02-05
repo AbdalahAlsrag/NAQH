@@ -11,6 +11,8 @@ int main(int argc, char** argv)
     NAQH::Application* app = NAQH::CreateApplication();
     app->Run();
     delete app;
+
+    return 0;
 }
 
 #endif
