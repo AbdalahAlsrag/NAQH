@@ -1,4 +1,6 @@
-#pragma once
+#ifndef NAQH_NAQH_H
+#define NAQH_NAQH_H
 
-#include "Core\Application.h"
-#include "Core\EntryPoint.h"
+#include "Core/Application.h"
+
+#endif

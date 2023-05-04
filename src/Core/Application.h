@@ -1,15 +1,26 @@
 #pragma once
-#include "Core.h"
 
-namespace NAQH{
-    class NQ_API Application
-    {
-    public:
-        Application();
-        ~Application();
-        void Run();
-    private:
+namespace NAQH {
+    struct ApplicationSpecs {
+        int width, height;
+        const char* title;
     };
 
-    Application* CreateApplication();
+    class Application {
+    public:
+        ~Application();
+
+        static void Create(ApplicationSpecs appSpecs);
+        static void Run();
+    private:
+        Application(ApplicationSpecs appSpecs);
+
+        static void Start();
+        static void Update();
+
+        static Application* instance;
+
+        static ApplicationSpecs appSpecs;
+        static bool isRunning;
+    };
 }
