@@ -1,1 +1,15 @@
-.vscode/
+# Binaries
+**/bin/
+bin-int/
+
+# NAQH files
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
+
+# Directories
